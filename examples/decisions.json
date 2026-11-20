@@ -1,0 +1,393 @@
+{
+  "review": {
+    "base": 1,
+    "digest": "3a1b3e046a209ad71106e44cef869e0254fabbda99279a1be618b1f6907d2624",
+    "rules": [
+      {
+        "id": "on-call-workshop",
+        "title": "On-call workshop",
+        "prerequisites": [
+          {
+            "fact": "responders",
+            "operator": "atLeast",
+            "value": 2
+          }
+        ],
+        "signals": []
+      },
+      {
+        "id": "queue-review",
+        "title": "Queue reliability review",
+        "prerequisites": [
+          {
+            "fact": "jobsPerHour",
+            "operator": "atLeast",
+            "value": 100
+          }
+        ],
+        "signals": [
+          {
+            "condition": {
+              "fact": "jobsPerHour",
+              "operator": "atLeast",
+              "value": 400
+            },
+            "points": 6
+          }
+        ]
+      },
+      {
+        "id": "recovery-drill",
+        "title": "Recovery drill",
+        "prerequisites": [
+          {
+            "fact": "recoveryMinutes",
+            "operator": "atMost",
+            "value": 120
+          }
+        ],
+        "signals": [
+          {
+            "condition": {
+              "fact": "recoveryMinutes",
+              "operator": "atMost",
+              "value": 60
+            },
+            "points": 8
+          }
+        ]
+      }
+    ],
+    "changes": {
+      "added": [],
+      "updated": [
+        "recovery-drill"
+      ],
+      "removed": []
+    }
+  },
+  "before": {
+    "version": 1,
+    "digest": "ccd3a5fbeda4684188a11b103bf885b674e13324a0963caff3530bb3800173ee",
+    "facts": {
+      "jobsPerHour": {
+        "value": 550,
+        "source": "Simulated queue snapshot"
+      },
+      "recoveryMinutes": {
+        "value": 45,
+        "source": "Example workshop questionnaire"
+      }
+    },
+    "decisions": [
+      {
+        "id": "on-call-workshop",
+        "title": "On-call workshop",
+        "status": "needs-evidence",
+        "score": null,
+        "prerequisites": [
+          {
+            "condition": {
+              "fact": "responders",
+              "operator": "atLeast",
+              "value": 2
+            },
+            "evidence": null,
+            "outcome": "missing"
+          }
+        ],
+        "signals": []
+      },
+      {
+        "id": "queue-review",
+        "title": "Queue reliability review",
+        "status": "eligible",
+        "score": 6,
+        "prerequisites": [
+          {
+            "condition": {
+              "fact": "jobsPerHour",
+              "operator": "atLeast",
+              "value": 100
+            },
+            "evidence": {
+              "value": 550,
+              "source": "Simulated queue snapshot"
+            },
+            "outcome": "met"
+          }
+        ],
+        "signals": [
+          {
+            "condition": {
+              "fact": "jobsPerHour",
+              "operator": "atLeast",
+              "value": 400
+            },
+            "evidence": {
+              "value": 550,
+              "source": "Simulated queue snapshot"
+            },
+            "outcome": "met",
+            "pointsAwarded": 6
+          }
+        ]
+      },
+      {
+        "id": "recovery-drill",
+        "title": "Recovery drill",
+        "status": "eligible",
+        "score": 4,
+        "prerequisites": [
+          {
+            "condition": {
+              "fact": "recoveryMinutes",
+              "operator": "atMost",
+              "value": 120
+            },
+            "evidence": {
+              "value": 45,
+              "source": "Example workshop questionnaire"
+            },
+            "outcome": "met"
+          }
+        ],
+        "signals": [
+          {
+            "condition": {
+              "fact": "recoveryMinutes",
+              "operator": "atMost",
+              "value": 60
+            },
+            "evidence": {
+              "value": 45,
+              "source": "Example workshop questionnaire"
+            },
+            "outcome": "met",
+            "pointsAwarded": 4
+          }
+        ]
+      }
+    ],
+    "ranking": [
+      "queue-review",
+      "recovery-drill"
+    ]
+  },
+  "after": {
+    "version": 2,
+    "digest": "3a1b3e046a209ad71106e44cef869e0254fabbda99279a1be618b1f6907d2624",
+    "facts": {
+      "jobsPerHour": {
+        "value": 550,
+        "source": "Simulated queue snapshot"
+      },
+      "recoveryMinutes": {
+        "value": 45,
+        "source": "Example workshop questionnaire"
+      }
+    },
+    "decisions": [
+      {
+        "id": "on-call-workshop",
+        "title": "On-call workshop",
+        "status": "needs-evidence",
+        "score": null,
+        "prerequisites": [
+          {
+            "condition": {
+              "fact": "responders",
+              "operator": "atLeast",
+              "value": 2
+            },
+            "evidence": null,
+            "outcome": "missing"
+          }
+        ],
+        "signals": []
+      },
+      {
+        "id": "queue-review",
+        "title": "Queue reliability review",
+        "status": "eligible",
+        "score": 6,
+        "prerequisites": [
+          {
+            "condition": {
+              "fact": "jobsPerHour",
+              "operator": "atLeast",
+              "value": 100
+            },
+            "evidence": {
+              "value": 550,
+              "source": "Simulated queue snapshot"
+            },
+            "outcome": "met"
+          }
+        ],
+        "signals": [
+          {
+            "condition": {
+              "fact": "jobsPerHour",
+              "operator": "atLeast",
+              "value": 400
+            },
+            "evidence": {
+              "value": 550,
+              "source": "Simulated queue snapshot"
+            },
+            "outcome": "met",
+            "pointsAwarded": 6
+          }
+        ]
+      },
+      {
+        "id": "recovery-drill",
+        "title": "Recovery drill",
+        "status": "eligible",
+        "score": 8,
+        "prerequisites": [
+          {
+            "condition": {
+              "fact": "recoveryMinutes",
+              "operator": "atMost",
+              "value": 120
+            },
+            "evidence": {
+              "value": 45,
+              "source": "Example workshop questionnaire"
+            },
+            "outcome": "met"
+          }
+        ],
+        "signals": [
+          {
+            "condition": {
+              "fact": "recoveryMinutes",
+              "operator": "atMost",
+              "value": 60
+            },
+            "evidence": {
+              "value": 45,
+              "source": "Example workshop questionnaire"
+            },
+            "outcome": "met",
+            "pointsAwarded": 8
+          }
+        ]
+      }
+    ],
+    "ranking": [
+      "recovery-drill",
+      "queue-review"
+    ]
+  },
+  "replay": {
+    "version": 1,
+    "digest": "ccd3a5fbeda4684188a11b103bf885b674e13324a0963caff3530bb3800173ee",
+    "facts": {
+      "jobsPerHour": {
+        "value": 550,
+        "source": "Simulated queue snapshot"
+      },
+      "recoveryMinutes": {
+        "value": 45,
+        "source": "Example workshop questionnaire"
+      }
+    },
+    "decisions": [
+      {
+        "id": "on-call-workshop",
+        "title": "On-call workshop",
+        "status": "needs-evidence",
+        "score": null,
+        "prerequisites": [
+          {
+            "condition": {
+              "fact": "responders",
+              "operator": "atLeast",
+              "value": 2
+            },
+            "evidence": null,
+            "outcome": "missing"
+          }
+        ],
+        "signals": []
+      },
+      {
+        "id": "queue-review",
+        "title": "Queue reliability review",
+        "status": "eligible",
+        "score": 6,
+        "prerequisites": [
+          {
+            "condition": {
+              "fact": "jobsPerHour",
+              "operator": "atLeast",
+              "value": 100
+            },
+            "evidence": {
+              "value": 550,
+              "source": "Simulated queue snapshot"
+            },
+            "outcome": "met"
+          }
+        ],
+        "signals": [
+          {
+            "condition": {
+              "fact": "jobsPerHour",
+              "operator": "atLeast",
+              "value": 400
+            },
+            "evidence": {
+              "value": 550,
+              "source": "Simulated queue snapshot"
+            },
+            "outcome": "met",
+            "pointsAwarded": 6
+          }
+        ]
+      },
+      {
+        "id": "recovery-drill",
+        "title": "Recovery drill",
+        "status": "eligible",
+        "score": 4,
+        "prerequisites": [
+          {
+            "condition": {
+              "fact": "recoveryMinutes",
+              "operator": "atMost",
+              "value": 120
+            },
+            "evidence": {
+              "value": 45,
+              "source": "Example workshop questionnaire"
+            },
+            "outcome": "met"
+          }
+        ],
+        "signals": [
+          {
+            "condition": {
+              "fact": "recoveryMinutes",
+              "operator": "atMost",
+              "value": 60
+            },
+            "evidence": {
+              "value": 45,
+              "source": "Example workshop questionnaire"
+            },
+            "outcome": "met",
+            "pointsAwarded": 4
+          }
+        ]
+      }
+    ],
+    "ranking": [
+      "queue-review",
+      "recovery-drill"
+    ]
+  }
+}
